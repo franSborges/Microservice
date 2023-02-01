@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { randomUUID } from 'crypto';
 import { Content } from './content';
-import { Replace } from 'src/helpers/Replace';
+import { Replace } from '@helpers/Replace';
 /* eslint-disable prettier/prettier */
 export interface NotificationProps {
   recipientId: string;
@@ -15,7 +15,7 @@ export class Notification {
   private _id: string;
   private props: NotificationProps;
 
-  constructor(props: Replace<NotificationProps, {createdAt?: Date}>) {
+  constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
     this._id = randomUUID();
     this.props = {
       ...props,
@@ -24,7 +24,7 @@ export class Notification {
    
   }
 
-  public get Id(): string {
+  public get Id(){
     return this._id;
   }
 
