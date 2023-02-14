@@ -15,6 +15,7 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "strict": true,
+    "resolveJsonModule": true,
     "noImplicitAny": false,
     "strictPropertyInitialization": false,
     "strictBindCallApply": false,
@@ -24,9 +25,7 @@
       "@app/*": ["./src/app/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@infra/*": ["./src/infra/*"],
-      "@test/*": ["./src/test/*"],
-
-
+      "@test/*": ["./src/test/*"]
     }
   }
 }

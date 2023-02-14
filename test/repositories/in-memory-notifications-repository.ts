@@ -5,15 +5,34 @@ import { NotificationsRepository } from '@app/repositories/notifications-reposit
 
 
 export class InMemoryNotificationsRepository implements NotificationsRepository {
-  findById(notificationId: string): Promise<Notification | null> {
-    throw new Error('Method not implemented.');
-  }
-  save(notification: Notification): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
+
   public notifications: Notification[] = [];
+
+  findById(notificationId: string): Promise<Notification | null> {
+   const notification  = this.notifications.find(
+    (i) => i.Id === notificationId
+  );
+
+   if (!notification) {
+    return null;
+   } 
+   
+   return notification;
+  }
+
+  save(notification: Notification): Promise<void> {
+    const notificationIndex = this.notifications.findIndex((i) => i.Id === notification.Id);
+
+    if (notificationIndex >= 0) {
+       this.notifications[notificationIndex] = notification;
+    }
+  }
   
   async create(notification: Notification) {
    this.notifications.push(notification);
+  }
+
+  async countManyByRecipientId(recipientId: string): Promise<number> {
+    return this.notifications.filter(notification => notification.recipientId === recipientId).length();
   }
 }
