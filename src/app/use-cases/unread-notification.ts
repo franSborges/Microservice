@@ -4,17 +4,17 @@ import { NotificationsRepository } from '../repositories/notifications-repositor
 import { NotificationNotfound } from './errors/notification-not-found';
 
 /* eslint-disable prettier/prettier */
-interface CancelNotificationRequest {
+interface UnreadNotificationRequest {
   notificationId: string;
 }
 
-type CancelNotificationResponse = void;
+type UnreadNotificationResponse = void;
 
 @Injectable()
-export class CancelNotification {
+export class UnreadNotification {
   constructor(private notificationsRepository: NotificationsRepository) {}
 
-  async execute(request: CancelNotificationRequest): Promise<CancelNotificationResponse> {
+  async execute(request: UnreadNotificationRequest): Promise<UnreadNotificationResponse> {
    const { notificationId } = request;
 
   const notification = await this.notificationsRepository.findById(notificationId);
@@ -24,7 +24,7 @@ export class CancelNotification {
    } 
 
 
-   notification.cancel();
+   notification.unread();
 
    await this.notificationsRepository.save(notification);
   }

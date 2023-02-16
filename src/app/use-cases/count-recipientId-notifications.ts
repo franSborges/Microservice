@@ -6,11 +6,9 @@ import { NotificationsRepository } from '../repositories/notifications-repositor
 interface CountRecipientIdNotificationsRequest {
   recipientId: string;
 }
-
 interface CountRecipientIdNotificationsResponse {
    count: number;
 } 
-
 @Injectable()
 export class CountRecipientIdNotifications {
   constructor(private notificationsRepository: NotificationsRepository) {}

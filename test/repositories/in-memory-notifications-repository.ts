@@ -5,10 +5,10 @@ import { NotificationsRepository } from '@app/repositories/notifications-reposit
 
 
 export class InMemoryNotificationsRepository implements NotificationsRepository {
-
+  
   public notifications: Notification[] = [];
 
-  findById(notificationId: string): Promise<Notification | null> {
+ async  findById(notificationId: string): Promise<Notification | null> {
    const notification  = this.notifications.find(
     (i) => i.Id === notificationId
   );
@@ -20,7 +20,7 @@ export class InMemoryNotificationsRepository implements NotificationsRepository 
    return notification;
   }
 
-  save(notification: Notification): Promise<void> {
+  async save(notification: Notification): Promise<void> {
     const notificationIndex = this.notifications.findIndex((i) => i.Id === notification.Id);
 
     if (notificationIndex >= 0) {
@@ -33,6 +33,10 @@ export class InMemoryNotificationsRepository implements NotificationsRepository 
   }
 
   async countManyByRecipientId(recipientId: string): Promise<number> {
-    return this.notifications.filter(notification => notification.recipientId === recipientId).length();
+    return this.notifications.filter(notification => notification.recipientId === recipientId).length;
+  }
+  
+  async findManyByRecipientId(recipientId: string): Promise<number> {
+    return this.notifications.filter(notification => notification.recipientId === recipientId).length;
   }
 }
